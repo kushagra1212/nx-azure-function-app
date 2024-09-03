@@ -1,89 +1,97 @@
-# BadhoAzure
+# nx-azure-function-app
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This repository provides a streamlined way to manage Azure Function Apps using Nx commands. The available commands allow you to initialize a new function app, create new functions, start the app locally, and deploy it.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+## Getting Started
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/npm-workspaces-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+### Prerequisites
 
-## Finish your remote caching setup
+- **Nx**: Ensure that you have Nx installed in your development environment.
+- **Azure Functions Core Tools**: You need to have Azure Functions Core Tools installed. Follow the instructions here: [Install Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=macos%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-javascript#install-the-azure-functions-core-tools).
+- **Azure CLI**: Install Azure CLI to manage your Azure resources. Instructions can be found here: [Install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-macos).
+- **Azure Login**: After installing Azure CLI, log in to your Azure account using:
+  ```bash
+  az login
+  ```
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/49tg0FI6YX)
+### Commands
 
+#### 1. Initialize a New Function App
 
-## Run tasks
+To initialize a new Azure Function App, use the following command:
 
-To run tasks with Nx use:
-
-```sh
-npx nx <target> <project-name>
+```bash
+nx run init-function-app <function_app_name>
 ```
 
-For example:
+This command will create a new directory for the function app under \`src/services/<function_app_name>\`, initialize it with JavaScript, and set the model to V3.
 
-```sh
-npx nx build myproject
+#### 2. Create a New Function
+
+To create a new function within your Azure Function App, use the command:
+
+```bash
+nx run create-func <function_app_name>
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+You will be prompted to enter the function name, template, authorization level, and model version. If you press enter without providing a value, the defaults will be used:
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- **Function Name:** (Required)
+- **Template:** (Default: 'HTTP trigger')
+- **Authorization Level:** (Default: 'Function')
+- **Model Version:** (Default: 'V3')
 
-## Versioning and releasing
+#### 3. Start the Function App Locally
 
-To version and release the library use
+To start your Azure Function App locally, use the command:
 
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](hhttps://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-To install a new plugin you can use the `nx add` command. Here's an example of adding the React plugin:
-```sh
-npx nx add @nx/react
+```bash
+nx run app-local-start <function_app_name>
 ```
 
-Use the plugin's generator to create new projects. For example, to create a new React app or library:
+This command will start the function app and allow you to test it locally.
 
-```sh
-# Genenerate an app
-npx nx g @nx/react:app demo
+#### 4. Deploy the Function App
 
-# Generate a library
-npx nx g @nx/react:lib some-lib
+To deploy your Azure Function App to Azure, use the command:
+
+```bash
+nx run app-deploy <function_app_name>
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+This command publishes the function app to Azure.
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+### Example Usage
 
+1. **Initialize Function App:**
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+   ```bash
+   nx run init-function-app my-function-app
+   ```
 
-## Install Nx Console
+2. **Create a Function:**
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+   ```bash
+   nx run create-func my-function-app
+   ```
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+   - Enter the function name: \`myFunction\`
+   - Template (default: 'HTTP trigger'): _Press Enter_
+   - Authorization level (default: 'Function'): _Press Enter_
+   - Model version (default: 'V3'): _Press Enter_
 
-## Useful links
+3. **Start Function App Locally:**
 
-Learn more:
+   ```bash
+   nx run app-local-start my-function-app
+   ```
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/npm-workspaces-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+4. **Deploy Function App:**
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+   ```bash
+   nx run app-deploy my-function-app
+   ```
+
+## License
+
+This project is licensed under the MIT License.

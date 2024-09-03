@@ -1,0 +1,48 @@
+{
+  "root": ".",
+  "targets": {
+    "init-function-app": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "[[ -x scripts/init-function-app.sh ]] || chmod +x scripts/init-function-app.sh",
+          "APP_NAME=${args.app-name}",
+          "./scripts/init-function-app.sh $APP_NAME"
+        ],
+        "parallel": false
+      }
+    },
+    "create-func": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "[[ -x scripts/create-function.sh ]] || chmod +x scripts/create-function.sh",
+          "APP_NAME=${args.name}",
+          "./scripts/create-function.sh $APP_NAME"
+        ],
+        "parallel": false
+      }
+    },
+    "app-local-start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "[[ -x scripts/app-local-start.sh ]] || chmod +x scripts/app-local-start.sh",
+          "APP_NAME=${args.name}",
+          "./scripts/app-local-start.sh $APP_NAME"
+        ],
+        "parallel": false
+      }
+    },
+    "app-deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "APP_NAME=${args.name}",
+          "func azure functionapp publish $APP_NAME"
+        ],
+        "parallel": false
+      }
+    }
+  }
+}
