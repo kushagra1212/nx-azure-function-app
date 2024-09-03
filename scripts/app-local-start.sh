@@ -28,6 +28,10 @@ if [ ! -d "$DIR_PATH" ]; then
   exit 1
 fi
 
+
+
+echo -e "${GREEN}Starting the function app $YELLOW$APP_NAME${GREEN}.${NC}"
+
 # Define the command
 CREATE_COMMAND="func host start --script-root $DIR_PATH --model V3 "
 
@@ -37,7 +41,6 @@ echo -e "${YELLOW}Running command:${NC} ${GREEN}$CREATE_COMMAND${NC}"
 eval $CREATE_COMMAND
 
 if [ $? -eq 0 ]; then
-  echo -e "${GREEN}Starting the function app $YELLOW$APP_NAME${GREEN}.${NC}"
 else
   echo -e "${RED}Failed.${NC}"
 fi

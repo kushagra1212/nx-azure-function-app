@@ -16,6 +16,12 @@ This repository provides a streamlined way to manage Azure Function Apps using N
 
 ### Commands
 
+##### Before Running the Commands
+
+```bash
+npm install
+```
+
 #### 1. Initialize a New Function App
 
 To initialize a new Azure Function App, use the following command:
