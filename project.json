@@ -38,8 +38,9 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
+          "[[ -x scripts/app-deploy.sh ]] || chmod +x scripts/app-deploy.sh",
           "APP_NAME=${args.name}",
-          "func azure functionapp publish $APP_NAME"
+          "./scripts/app-deploy.sh $APP_NAME"
         ],
         "parallel": false
       }
