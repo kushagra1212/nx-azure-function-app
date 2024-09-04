@@ -41,8 +41,8 @@ echo -e "${YELLOW}Running command:${NC} ${GREEN}$CREATE_COMMAND${NC}"
 eval $CREATE_COMMAND
 
 if [ $? -eq 0 ]; then
+  :  # No-op (do nothing)
 else
   echo -e "${RED}Failed.${NC}"
 fi
-
 
